@@ -1,23 +1,27 @@
 // 示例时间线数据
 const timelineData = [
-    {
-        date: '2023-01-01',
-        event: '事件1：新年的开始',
-        image: 'example1.jpg'
-    },
-    {
-        date: '2023-06-15',
-        event: '事件2：项目完成',
-        image: 'example2.jpg'
-    }
+    { date: '2021-03-10', event: '2021 事件 1', image: 'example1.jpg' },
+    { date: '2021-07-20', event: '2021 事件 2', image: 'example2.jpg' },
+    { date: '2022-01-15', event: '2022 事件 1', image: 'example1.jpg' },
+    { date: '2022-09-30', event: '2022 事件 2', image: 'example2.jpg' },
+    { date: '2023-01-01', event: '2023 事件 1：新年的开始', image: 'example1.jpg' },
+    { date: '2023-06-15', event: '2023 事件 2：项目完成', image: 'example2.jpg' }
 ];
 
 // 渲染时间线
 function renderTimeline() {
     const timeline = document.getElementById('timeline');
     timeline.innerHTML = '';
-
+    let currentYear = null;
     timelineData.forEach(item => {
+        const itemYear = new Date(item.date).getFullYear();
+        if (itemYear !== currentYear) {
+            const yearElement = document.createElement('div');
+            yearElement.className = 'timeline-year';
+            yearElement.textContent = itemYear;
+            timeline.appendChild(yearElement);
+            currentYear = itemYear;
+        }
         const itemElement = document.createElement('div');
         itemElement.className = 'timeline-item';
 

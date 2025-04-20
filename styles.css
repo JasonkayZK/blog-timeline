@@ -1,17 +1,21 @@
 #timeline {
     position: relative;
-    padding: 20px 0;
+    padding: 2rem 0;
     margin: 0 auto;
-    max-width: 1000px;
+    max-width: 1200px;
+    background-color: #f3f4f6;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 #timeline::before {
     content: '';
     position: absolute;
     left: 50%;
-    width: 2px;
+    width: 6px;
     height: 100%;
-    background: #ccc;
+    background: #2563eb;
+    border-radius: 3px;
 }
 
 .timeline-item {
@@ -36,14 +40,24 @@
 }
 
 .timeline-content {
-    background: #f5f5f5;
-    padding: 20px;
-    border-radius: 5px;
-    margin: 0 20px;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 0 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .timeline-date {
-    font-weight: bold;
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
 }
 
 .timeline-image {
@@ -57,19 +71,44 @@
     left: 100%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
+    font-size: 1rem;
     color: white;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-dot:hover {
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 .timeline-dot-number {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.timeline-year {
+    position: relative;
+    left: 0;
+    transform: none;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1d4ed8;
+    background-color: #ffffff;
+    padding: 0.3rem 0.6rem; /* 调整内边距 */
+    text-align: center; /* 添加文字居中 */
+    width: fit-content; /* 调整宽度 */
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 2;
 }
