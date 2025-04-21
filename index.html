@@ -4,10 +4,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>时间线</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+#timeline {
+    position: relative;
+    padding: 2rem 0;
+    margin: 0 auto;
+    max-width: 1200px;
+    background-color: #f3f4f6;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+#timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 6px;
+    height: 100%;
+    background: #2563eb;
+    border-radius: 3px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.timeline-content {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 0 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.timeline-date {
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.timeline-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: white;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-dot:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.timeline-dot-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeline-year {
+    position: relative;
+    left: 0;
+    transform: none;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1d4ed8;
+    background-color: #ffffff;
+    padding: 0.3rem 0.6rem; /* 调整内边距 */
+    text-align: center; /* 添加文字居中 */
+    width: fit-content; /* 调整宽度 */
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 2;
+}
+    </style>
 </head>
 <body>
     <div id="timeline"></div>
-    <script src="script.js"></script>
+    <script>
+// 示例时间线数据
+const timelineData = [
+    { date: '2021-03-10', event: '2021 事件 1'},
+    { date: '2021-07-20', event: '2021 事件 2', image: 'example2.jpg' },
+    { date: '2022-01-15', event: '2022 事件 1', image: 'example1.jpg' },
+    { date: '2022-09-30', event: '2022 事件 2', image: 'example2.jpg' },
+    { date: '2023-01-01', event: '2023 事件 1：新年的开始', image: 'example1.jpg' },
+    { date: '2023-06-15', event: '2023 事件 2：项目完成', image: 'example2.jpg' }
+];
+
+// 渲染时间线
+function renderTimeline() {
+    const timeline = document.getElementById('timeline');
+    timeline.innerHTML = '';
+    let currentYear = null;
+    timelineData.forEach(item => {
+        const itemYear = new Date(item.date).getFullYear();
+        if (itemYear !== currentYear) {
+            const yearElement = document.createElement('div');
+            yearElement.className = 'timeline-year';
+            yearElement.textContent = itemYear;
+            timeline.appendChild(yearElement);
+            currentYear = itemYear;
+        }
+        const itemElement = document.createElement('div');
+        itemElement.className = 'timeline-item';
+
+        const dotElement = document.createElement('div');
+        dotElement.className = 'timeline-dot';
+        dotElement.style.backgroundColor = getRandomColor();
+
+        // 添加数字元素
+        const numberElement = document.createElement('span');
+        numberElement.textContent = Array.from(timelineData).indexOf(item) + 1;
+        numberElement.className = 'timeline-dot-number';
+        dotElement.appendChild(numberElement);
+
+        const contentElement = document.createElement('div');
+        contentElement.className = 'timeline-content';
+
+        const dateElement = document.createElement('div');
+        dateElement.className = 'timeline-date';
+        dateElement.textContent = item.date;
+
+        const eventElement = document.createElement('div');
+        eventElement.textContent = item.event;
+
+        const imageElement = document.createElement('img');
+        imageElement.className = 'timeline-image';
+        if (item.image) {
+            imageElement.src = item.image;
+            imageElement.alt = item.event;
+            contentElement.appendChild(imageElement);
+        }
+
+        contentElement.appendChild(dateElement);
+        contentElement.appendChild(eventElement);
+        contentElement.appendChild(imageElement);
+        itemElement.appendChild(dotElement);
+        itemElement.appendChild(contentElement);
+        timeline.appendChild(itemElement);
+    });
+}
+
+// 页面加载完成后渲染时间线
+window.addEventListener('load', renderTimeline);
+
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+    </script>
 </body>
 </html>
