@@ -1,5 +1,6 @@
 ## **Blog更新历史**
 
+*   <font color="#ff0000">**2025-04-21 新增[`博客时间线`](/blog-timeline/)页面入口**</font>
 *   <font color="#ff0000">**2025-04-21 新增[`摄影分享`](/photos/)页面入口**</font>
 *   <font color="#ff0000">**2025-03-20 [`实时数据`](/realtime)页面新增[`umami`](https://us.umami.is/share/j5SVhZLblKH5HIbJ/jasonkayzk.github.io)站点数据分析**</font>
 *   <font color="#ff0000">**2024-08-26 新增[`跑步健身`](/running/)页面入口**</font>

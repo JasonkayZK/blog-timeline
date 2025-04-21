@@ -157,13 +157,7 @@ function renderTimeline() {
         const eventElement = document.createElement('div');
         // 简单的 HTML 标签过滤
         const allowedTags = ['b', 'i', 'u', 'a', 'p', 'br'];
-        const filteredEvent = item.event.replace(/<[^>]+>/g, (tag) => {
-            const tagName = tag.match(/<([a-z]+)/i)?.[1]?.toLowerCase();
-            if (tagName && allowedTags.includes(tagName)) {
-                return tag;
-            }
-            return '';
-        });
+        const filteredEvent = item.event;
         eventElement.innerHTML = filteredEvent;
         contentElement.appendChild(eventElement);
 
