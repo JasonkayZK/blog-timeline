@@ -1,5 +1,6 @@
 // 示例时间线数据
 const timelineData = [
+    { date: '2025-07-30', event: '新增 <a href="/jp">日语分站</a> 页面入口', image: 'images/jp-blog.png' },
     { date: '2025-04-21', event: '新增 <a href="/blog-timeline">博客时间线</a> 页面入口', image: 'images/blog-timeline.png' },
     { date: '2025-04-21', event: '新增 <a href="/photos">摄影分享</a> 页面入口', image: 'images/photos-entry.png' },
     { date: '2025-03-20', event: '实时数据 <a href="/realtime">实时数据</a> 页面新增：<a href="https://us.umami.is/share/j5SVhZLblKH5HIbJ/jasonkayzk.github.io">umami</a> 站点数据分析', image: 'images/realtime-umami.png'  },
